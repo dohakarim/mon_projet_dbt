@@ -1,0 +1,43 @@
+-- Nettoyage et formatage des données de base RH
+WITH base AS (
+    SELECT * FROM GOOGLE_SHEETS.BI_RH_TABLE
+),
+
+nettoye AS (
+    SELECT
+        EMPLOYEE_NUMBER,
+        UPPER(GENDER) AS gender,
+        INITCAP(EDUCATION_FIELD) AS education_field,
+        LOWER(MARITAL_STATUS) AS marital_status,
+        DEPARTMENT,
+        AGE,
+        JOB_ROLE,
+        JOB_LEVEL,
+        JOB_INVOLVEMENT,
+        JOB_SATISFACTION,
+        ENVIRONMENT_SATISFACTION,
+        RELATIONSHIP_SATISFACTION,
+        WORK_LIFE_BALANCE,
+        CASE WHEN ATTRITION = 'Yes' THEN 1 ELSE 0 END AS is_attrition,
+        CASE WHEN OVER_TIME = 'Yes' THEN 1 ELSE 0 END AS is_overtime,
+        BUSINESS_TRAVEL,
+        MONTHLY_INCOME,
+        MONTHLY_RATE,
+        DAILY_RATE,
+        HOURLY_RATE,
+        DISTANCE_FROM_HOME,
+        EDUCATION,
+        PERFORMANCE_RATING,
+        PERCENT_SALARY_HIKE,
+        TOTAL_WORKING_YEARS,
+        NUM_COMPANIES_WORKED,
+        YEARS_AT_COMPANY,
+        YEARS_IN_CURRENT_ROLE,
+        YEARS_SINCE_LAST_PROMOTION,
+        YEARS_WITH_CURR_MANAGER,
+        TRAINING_TIMES_LAST_YEAR,
+        STOCK_OPTION_LEVEL
+    FROM base
+)
+
+SELECT * FROM nettoye
